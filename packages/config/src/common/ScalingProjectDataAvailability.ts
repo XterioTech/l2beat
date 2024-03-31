@@ -14,6 +14,7 @@ export type DataAvailabilityLayer =
   | 'Ethereum (calldata)'
   | 'Ethereum (blobs)'
   | 'Ethereum (blobs or calldata)'
+  | 'BNB Smart Chain (calldata)'
   | 'MEMO'
   | 'DAC'
   | 'Celestia'

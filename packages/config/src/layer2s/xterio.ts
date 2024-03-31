@@ -1,9 +1,9 @@
 import { EthereumAddress, formatSeconds, UnixTime } from '@l2beat/shared-pure'
 
-import { DERIVATION } from '../common'
+import { RISK_VIEW, TECHNOLOGY_DATA_AVAILABILITY } from '../common'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { OPTIMISTIC_ROLLUP_STATE_UPDATES_WARNING } from './common/liveness'
-import { opStack } from './templates/opStack'
+import { DAProvider, opStack } from './templates/opStack'
 import { Layer2 } from './types'
 
 const discovery = new ProjectDiscovery('xterio', 'bsc')
@@ -20,7 +20,16 @@ const FINALIZATION_PERIOD_SECONDS: number = discovery.getContractValue<number>(
 
 const sequencerWindowSize = 14400  // 12h with l1 block 3s
 
+export const daProvider: DAProvider = {
+  name: 'DAC',
+  fallback: 'BNB Smart Chain (calldata)',
+  riskView: RISK_VIEW.DATA_EXTERNAL,
+  technology: TECHNOLOGY_DATA_AVAILABILITY.GENERIC_OFF_CHAIN,
+  bridge: { type: 'Enshrined' },
+}
+
 export const xterio: Layer2 = opStack({
+  daProvider,
   discovery,
   display: {
     name: 'Xterio Chain',
@@ -100,7 +109,7 @@ export const xterio: Layer2 = opStack({
       url: 'https://xterscan.io/api',
       type: 'blockscout',
     },
-    // ~ Timestamp of block number 0 on Base
+    // ~ Timestamp of block number 0 on Xterio chain
     // https://xterscan.io/block/0
     minTimestampForTvl: UnixTime.fromDate(new Date('2024-03-27T09:20:15Z')),    
     multicallContracts: [],
