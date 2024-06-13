@@ -104,6 +104,7 @@ import { world } from './world'
 import { xchain } from './xchain'
 import { xlayer } from './xlayer'
 import { xpla } from './xpla'
+import { xterio } from './xterio'
 import { zentachain } from './zentachain'
 import { zircuit } from './zircuit'
 import { zkcandy } from './zkcandy'
@@ -223,6 +224,7 @@ export const layer2s: Layer2[] = [
   xchain,
   xlayer,
   xpla,
+  xterio,
   zentachain,
   zircuit,
   zkcandy,
